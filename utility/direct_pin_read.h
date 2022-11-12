@@ -85,6 +85,12 @@
 #define PIN_TO_BITMASK(pin)             pin
 #define DIRECT_PIN_READ(base, pin)      digitalRead(pin)
 
+#elif defined (ARDUINO_ARCH_RP2040)
+#define IO_REG_TYPE                     pin_size_t
+#define PIN_TO_BASEREG(pin)             (0)
+#define PIN_TO_BITMASK(pin)             (pin)
+#define DIRECT_PIN_READ(base, pin)      (gpio_get(pin) ? 1 : 0)
+
 #elif defined(__arc__) /* Arduino101/Genuino101 specifics */
 
 #include "scss_registers.h"
